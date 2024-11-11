@@ -12,10 +12,18 @@ const App = () => {
     address: "HCM",
     country: "Japan",
   }
+
+  const addTodo = (name) => {
+    alert(`call me ${name}`);
+  }
+
+
   return (
     <div className="todo-container">
       <div className="todo-title">Todo List</div>
-      <TodoNew />
+      <TodoNew
+        addTodo={addTodo}
+      />
       <TodoData
         name={hoidanit}
         age={age}
