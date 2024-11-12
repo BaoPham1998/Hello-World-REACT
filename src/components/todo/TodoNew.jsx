@@ -5,7 +5,7 @@ const TodoNew = (props) => {
     //useState hook
     // const valueInput = "baopham";
 
-    const [valueInput, setValueInput] = useState("BaoPham")
+    const [valueInput, setValueInput] = useState("baopham")
     const { addTodo } = props;
 
 
@@ -13,6 +13,7 @@ const TodoNew = (props) => {
 
     const handleClick = () => {
         addTodo(valueInput);
+        setValueInput("");
     }
     const handleOnChange = (name) => {
         setValueInput(name);
@@ -21,6 +22,7 @@ const TodoNew = (props) => {
         <div className="todo-new">
             <input type="text" className="todo-input" placeholder="Enter your task"
                 onChange={(event) => { handleOnChange(event.target.value) }}
+                value={valueInput}
             />
             <button className="todo-button"
                 onClick={handleClick}>Add</button>
@@ -30,5 +32,4 @@ const TodoNew = (props) => {
         </div>
     )
 }
-
 export default TodoNew;
