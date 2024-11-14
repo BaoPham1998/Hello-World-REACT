@@ -11,7 +11,6 @@ const App = () => {
     // { id: 2, name: `Watching Youtube` }
   ])
 
-
   const addTodo = (name) => {
     const newTodoList = {
       id: handleId(1, 10000),
@@ -22,6 +21,11 @@ const App = () => {
   const handleId = (max, min) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+  const handleDeleteId = (id) => {
+    const newTodoList = todoList.filter((item) => item.id !== id)
+    setTodoList(newTodoList)
+  }
+
 
   return (
     <div className="todo-container">
@@ -32,6 +36,7 @@ const App = () => {
       {todoList.length > 0 ?
         <TodoData
           todoList={todoList}
+          handleDeleteId={handleDeleteId}
         />
         :
         <div div className="todo-image">
