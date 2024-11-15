@@ -1,27 +1,27 @@
-.Header {
-    background-color: #eacaa7;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 40px;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto;
-    border-radius: 0px 0px 12px 12px;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
 }
 
-.Header .menu-list .li-list {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-
+li {
+    float: left;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-}
-
-a:hover {
-    cursor: pointer;
+li a {
+    display: block;
     color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #04AA6D;
 }
