@@ -9,15 +9,15 @@
 }
 
 .todo-container {
-    margin: 50px auto;
-    width: 600px;
+    background: linear-gradient(to right, #FEA66D, #CE6458);
+    height: 100vh;
 }
 
 .todo-title {
     font-size: 34px;
-    background: linear-gradient(to right, #ea4c3a, #eacaa7);
-    -webkit-background-clip: text;
-    color: transparent;
+    /* background: linear-gradient(to right, #ea4c3a, #eacaa7);
+    -webkit-background-clip: text; */
+    color: white;
     margin: 40px 50px;
     font-weight: 700;
     text-align: center;
@@ -104,4 +104,10 @@
 .todo-item {
     display: flex;
     justify-content: space-between;
+}
+
+.todo-data {
+    background-color: #fff;
+    border-radius: 10px;
+    ;
 }

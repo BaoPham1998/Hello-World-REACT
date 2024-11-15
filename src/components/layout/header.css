@@ -1,0 +1,19 @@
+.Header {
+    background-color: #eacaa7;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 40px;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 0px 0px 12px 12px;
+}
+
+.Header .menu-list .li-list {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    text-decoration: none;
+    color: black;
+    text-decoration: none;
+}
