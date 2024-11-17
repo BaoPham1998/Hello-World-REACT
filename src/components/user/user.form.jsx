@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Input } from 'antd';
 import { Button, Flex } from 'antd';
+import axios from 'axios';
 const UserForm = () => {
 
     const [fullName, setFullName] = useState("")
@@ -8,8 +9,14 @@ const UserForm = () => {
     const [password, setPassword] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const handleClickBtn = () => {
-        console.log("check data:", { fullName, email, password, phoneNumber });
-        // send to server
+        const URL_BACKEND = "http://localhost:8080/api/v1/user";
+        const data = {
+            fullName: fullName,
+            email: email,
+            password: password,
+            phone: phoneNumber,
+        }
+        axios.post(URL_BACKEND, data)
     }
     return (
         <div className="user-form" style={{ margin: "20px 0" }}>
