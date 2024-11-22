@@ -4,8 +4,8 @@ import { Button, Flex, Modal } from 'antd';
 import { createUserAPI } from "../../services/api.services"
 import { notification } from 'antd';
 
-const UserForm = () => {
-
+const UserForm = (props) => {
+    const { loadUser } = props;
     const [fullName, setFullName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -17,12 +17,14 @@ const UserForm = () => {
     const handleSubmitBtn = async () => {
         const res = await createUserAPI(fullName, email, password, phoneNumber);
 
+
         if (res.data) {
             notification.success({
                 message: "Create user",
                 description: "tạo user thành công"
             })
-            setIsModalOpen(false)
+            resetAndCloseModal()
+            await loadUser()
         } else {
             notification.error({
                 message: "Error create user",
@@ -30,13 +32,16 @@ const UserForm = () => {
             })
 
         }
+    }
+    const resetAndCloseModal = () => {
+        setIsModalOpen(false)
         setFullName("");
         setEmail("");
         setPassword("");
         setPhoneNumber("");
         setIsModalOpen("");
-
     }
+
     return (
         <div className="user-form" style={{ margin: "20px 0" }}>
 
@@ -49,7 +54,7 @@ const UserForm = () => {
             <Modal title="Create User"
                 open={isModalOpen}
                 onOk={() => handleSubmitBtn()}
-                onCancel={() => setIsModalOpen(false)}
+                onCancel={() => resetAndCloseModal()}
                 maskClosable={false}
                 okText="CREATE">
                 <div style={{ display: "flex", gap: "15px", flexDirection: "column" }}>
