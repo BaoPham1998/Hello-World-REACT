@@ -4,9 +4,9 @@ import { fetchAllUserAPI } from '../services/api.services'
 import { useState, React } from 'react';
 import { useEffect } from 'react';
 
+
 const usersPage = () => {
     const [dataUsers, setDataUsers] = useState([]);
-
     const loadUser = async () => {
         const res = await fetchAllUserAPI()
         setDataUsers(res.data)
