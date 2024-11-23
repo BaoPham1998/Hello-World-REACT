@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <TodoApp />
       },
       {
-        path: "/users",
+        path: "/Users",
         element: <UsersPage />
       },
       {

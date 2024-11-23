@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { Input } from 'antd';
-import { Button, Flex, Modal } from 'antd';
+import { Button, Flex, Modal, Input, notification } from 'antd';
 import { createUserAPI } from "../../services/api.services"
-import { notification } from 'antd';
 
 const UserForm = (props) => {
     const { loadUser } = props;
@@ -16,8 +14,6 @@ const UserForm = (props) => {
 
     const handleSubmitBtn = async () => {
         const res = await createUserAPI(fullName, email, password, phoneNumber);
-
-
         if (res.data) {
             notification.success({
                 message: "Create user",
