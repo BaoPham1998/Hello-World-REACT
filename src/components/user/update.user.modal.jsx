@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react';
 import { Modal, Input, notification } from 'antd';
-import { createUserAPI, updateUserAPI } from '../../services/api.services';
+import { updateUserAPI } from '../../services/api.services';
 const UpdateUserModal = (props) => {
 
     const [id, setId] = useState("")

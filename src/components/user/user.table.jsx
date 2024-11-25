@@ -1,9 +1,9 @@
-import React from 'react'
-import { Table } from 'antd';
+import { Table, Popconfirm, message, notification } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import UpdateUserModal from './update.user.modal';
 import { useState } from 'react';
 import UserInfo from "./userInfo"
+import { deleteUser } from '../../services/api.services';
 
 
 
@@ -15,8 +15,27 @@ const usertable = (props) => {
     const [userInfo, setUserInfo] = useState(null);
 
 
+    const handleDeleteUser = async (id) => {
 
+        const res = await deleteUser(id);
+        if (res.data) {
+            notification.success({
+                message: "Delete user",
+                description: "Delete user thành công"
+            })
+            await loadUser()
+        } else {
+            notification.error({
+                message: "Error create user",
+                description: JSON.stringify(res.message)
+            })
 
+        }
+    }
+
+    const cancel = () => {
+        message.error('Click on No');
+    };
 
     const columns = [
         {
@@ -55,8 +74,20 @@ const usertable = (props) => {
                             setIsModalUpdateOpen(true);
                         }}
                         style={{ cursor: "pointer", color: "orange" }} />
-                    <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
-                </div>
+
+                    <Popconfirm
+                        placement="left"
+                        title="Delete the task"
+                        description="Are you sure to delete this task?"
+                        onConfirm={() => handleDeleteUser(record._id)}
+                        onCancel={cancel}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                    </Popconfirm>
+
+                </div >
             ),
         },
     ];
@@ -76,12 +107,14 @@ const usertable = (props) => {
                 setDataUpdate={setDataUpdate}
                 loadUser={loadUser}
             />
+
             <UserInfo
                 userInfo={userInfo}
                 setUserInfo={setUserInfo}
                 setOpenInfo={setOpenInfo}
                 openInfo={openInfo}
             />
+
 
         </>
     )

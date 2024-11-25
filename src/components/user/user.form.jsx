@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Button, Flex, Modal, Input, notification } from 'antd';
+import { useState } from 'react'
+import { Button, Modal, Input, notification } from 'antd';
 import { createUserAPI } from "../../services/api.services"
 
 const UserForm = (props) => {
