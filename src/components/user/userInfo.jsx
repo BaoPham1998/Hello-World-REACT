@@ -1,15 +1,33 @@
 
 
-import { Drawer, Button } from 'antd';
+import { Drawer } from 'antd';
+import { useState } from 'react';
 
 const userInfo = (props) => {
     const { userInfo, setUserInfo, openInfo, setOpenInfo } = props
+    const [selectedFile, setSelectedFile] = useState(null)
+    const [preview, setPreview] = useState(null)
 
 
     const onClose = () => {
         setOpenInfo(false);
         setUserInfo(null)
     };
+
+
+    const handleUpdateAvatar = (event) => {
+        if (!event.target.files || event.target.files.length === 0) {
+            setSelectedFile(null);
+            setPreview(null);
+            return;
+        }
+        const file = event.target.files[0]
+        if (file) {
+            setSelectedFile(file)
+            setPreview(URL.createObjectURL(file))
+        }
+    }
+    console.log("check preview updated", preview)
 
     return (
         <>
@@ -31,9 +49,17 @@ const userInfo = (props) => {
                         <br />
                         <p>Avatar:</p>
                         <br />
-                        <div>
+                        <div style={{
+                            marginTop: "10px",
+                            height: "100px", width: "150px",
+                            border: "1px solid #ccc",
+                        }}>
                             <img src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${userInfo.avatar}`}
-                                height={150} width={150}></img>
+                                style={{
+                                    height: "100%",
+                                    width: "100%",
+                                    objectFit: 'contain'
+                                }}></img>
                         </div>
                         <div style={{ marginTop: "18px" }}>
                             <label htmlFor='btnUpload' style={{
@@ -43,9 +69,24 @@ const userInfo = (props) => {
                                 borderRadius: "10px",
                                 cursor: "pointer"
                             }}>Upload Avatar</label>
-                            <input type='file' hidden id='btnUpload' />
+                            <input type='file' hidden id='btnUpload'
+                                onChange={(event) => handleUpdateAvatar(event)}
+                            />
                         </div>
-                        {/* <Button type='primary'>Upload Avatar</Button> */}
+                        {preview &&
+                            <div style={{
+                                marginTop: "20px",
+                                height: "100px", width: "150px",
+                            }}>
+                                <img src={preview}
+                                    style={{
+                                        height: "100%",
+                                        width: "100%",
+                                        objectFit: 'contain'
+                                    }}></img>
+                            </div>
+                        }
+
 
 
 
@@ -55,7 +96,7 @@ const userInfo = (props) => {
                             <p>Không tìm thấy user</p>
                         </>
                 }
-            </Drawer>
+            </Drawer >
         </>
     )
 }
