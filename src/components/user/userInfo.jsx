@@ -1,10 +1,10 @@
 
 
-import { Drawer } from 'antd';
+import { Drawer,Button, notification } from 'antd';
 import { useState } from 'react';
-
-const userInfo = (props) => {
-    const { userInfo, setUserInfo, openInfo, setOpenInfo } = props
+import {handleUploadFile, updateUserAvatarAPI} from "../../services/api.services"
+const UserInfo = (props) => {
+    const { userInfo, setUserInfo, openInfo, setOpenInfo ,loadUser } = props
     const [selectedFile, setSelectedFile] = useState(null)
     const [preview, setPreview] = useState(null)
 
@@ -27,7 +27,36 @@ const userInfo = (props) => {
             setPreview(URL.createObjectURL(file))
         }
     }
-    console.log("check preview updated", preview)
+    
+    const handleSaveAvatar = async () => {
+        const resUpload =  await handleUploadFile(selectedFile,"avatar")
+        if(resUpload.data){
+            const newAvatar = resUpload.data.fileUploaded;
+            const resUpdateAvatar = await updateUserAvatarAPI(newAvatar,userInfo._id,userInfo.fullName,userInfo.phone)
+            if(resUpdateAvatar.data){
+                setOpenInfo(false);
+                setSelectedFile(null);
+                setPreview(null);
+                loadUser();
+                notification.success({
+                    message: "Update user avatar",
+                    description: "Update avatar thành công",
+                })
+            }else{
+                notification.error({
+                    message: "Error",
+                    description: JSON.stringify(resUpdateAvatar.message)
+                })
+            }
+            // notification.success()
+        }else{
+            notification.error({
+                message: "Error",
+                description: "Update avatar thất bại"
+            })
+        }
+        
+    }
 
     return (
         <>
@@ -52,7 +81,6 @@ const userInfo = (props) => {
                         <div style={{
                             marginTop: "10px",
                             height: "100px", width: "150px",
-                            border: "1px solid #ccc",
                         }}>
                             <img src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${userInfo.avatar}`}
                                 style={{
@@ -74,6 +102,7 @@ const userInfo = (props) => {
                             />
                         </div>
                         {preview &&
+                        <>
                             <div style={{
                                 marginTop: "20px",
                                 height: "100px", width: "150px",
@@ -85,6 +114,13 @@ const userInfo = (props) => {
                                         objectFit: 'contain'
                                     }}></img>
                             </div>
+                            <Button style={{
+                                marginTop: "20px",
+                            }}
+                            type='primary'
+                            onClick={handleSaveAvatar}>SAVE</Button>
+                            
+                        </>
                         }
 
 
@@ -101,4 +137,4 @@ const userInfo = (props) => {
     )
 }
 
-export default userInfo
+export default UserInfo
