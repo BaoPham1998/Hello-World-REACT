@@ -1,8 +1,30 @@
-import { Button, Input, Form } from 'antd';
+import { Button, Input, Form, notification } from 'antd';
+import { registerUserAPI } from '../services/api.services';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
     const [form] = Form.useForm();
-    const onFinish = (values) => {
+    const navigate = useNavigate();
+    const onFinish = async (values) => {
+        const res = await registerUserAPI(
+            values.fullName,
+            values.email,
+            values.password,
+            values.phone)
+        if (res.data) {
+            notification.success({
+                message: "Register",
+                description: "Register successfully"
+            });
+            navigate('/login')
+        } else {
+            notification.error({
+                message: "Error",
+                description: JSON.stringify(res.message)
+            })
+
+        }
+
         console.log("check values", values)
     }
     return (
@@ -16,8 +38,8 @@ const RegisterPage = () => {
                 margin: "50px",
             }}>
                 <Form.Item
-                    label="Username"
-                    name="username"
+                    label="Full Name"
+                    name="fullName"
                     rules={[
                         {
                             required: true,
@@ -35,6 +57,7 @@ const RegisterPage = () => {
                             required: true,
                             message: 'Please input your Email!',
                         },
+
                     ]}
                 >
                     <Input />
@@ -57,8 +80,10 @@ const RegisterPage = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your Phone number!',
-                        },
+                            pattern: new RegExp(/\d+/g),
+                            message: "Wrong format!"
+                        }
+
                     ]}
                 >
                     <Input />
@@ -70,6 +95,7 @@ const RegisterPage = () => {
                         width: "100px"
                     }}
                 > Register</Button>
+
             </div>
         </Form >
     )
