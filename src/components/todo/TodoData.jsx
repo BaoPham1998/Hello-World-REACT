@@ -10,6 +10,7 @@ const TodoData = (props) => {
                 return (
                     <div className={"todo-item"} key={item.id}>
                         <div>{item.name}</div>
+                        <div>{item.id}</div>
                         <button onClick={() => { handleDeleteId(item.id) }}>Delete</button>
                     </div>
                 )

@@ -7,8 +7,8 @@ import "./todo.css";
 
 const TodoApp = () => {
     const [todoList, setTodoList] = useState([
-        // { id: 1, name: `Learning React` },
-        // { id: 2, name: `Watching Youtube` }
+        { id: 1, name: `Learning React` },
+        { id: 2, name: `Watching Youtube` }
     ])
 
     const addTodo = (name) => {
