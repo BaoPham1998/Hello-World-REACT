@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from "react-router-dom";
 import { Menu } from "antd"
-import { UsergroupAddOutlined, HomeOutlined, BookOutlined } from '@ant-design/icons';
+import { UsergroupAddOutlined, HomeOutlined, BookOutlined, SettingOutlined } from '@ant-design/icons';
 import { useState } from "react"
 
 
@@ -28,7 +28,22 @@ const header = () => {
         key: 'Book',
         icon: <BookOutlined />,
     },
-    ];
+    {
+        label: 'Cài đặt',
+        key: 'Setting',
+        icon: <SettingOutlined />,
+        children: [
+            {
+                label: <Link to={"/login"}>Đăng nhập</Link>,
+                key: 'Login',
+            },
+            {
+                label: 'Đăng xuất',
+                key: 'Logout',
+            }
+        ]
+    }
+    ]
 
     return (
         <Menu
