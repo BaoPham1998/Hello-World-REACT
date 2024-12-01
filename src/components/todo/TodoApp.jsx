@@ -34,7 +34,7 @@ const TodoApp = () => {
                     handleDeleteId={handleDeleteId}
                 />
                 :
-                <div div className="todo-image">
+                <div className="todo-image">
                     <img src={reactLogo} className="logo" />
                 </div>}
         </>
