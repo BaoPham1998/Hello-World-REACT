@@ -1,20 +1,26 @@
-import React from 'react'
-import { Link, NavLink } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import { Menu } from "antd"
-import { UsergroupAddOutlined, HomeOutlined, BookOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+    UsergroupAddOutlined, HomeOutlined, BookOutlined,
+    LoginOutlined, AliwangwangOutlined
+} from '@ant-design/icons';
 import { useState, useContext } from "react"
 import { AuthContext } from '../context/auth.context';
 
 
 const header = () => {
     const [current, setCurrent] = useState('');
-    const { user } = useContext(AuthContext);
-    console.log(user);
+    const { user, setIsLoadingPage } = useContext(AuthContext);
 
     const onClick = (e) => {
-        console.log('click ', e);
         setCurrent(e.key);
     };
+    const logout = () => {
+        localStorage.clear();
+        window.location.href = '/';
+        setIsLoadingPage(false);
+    }
 
 
     const items = [{
@@ -32,21 +38,25 @@ const header = () => {
         key: 'Book',
         icon: <BookOutlined />,
     },
-    {
-        label: 'Cài đặt',
-        key: 'Setting',
-        icon: <SettingOutlined />,
+
+    ...(!user.id ? [{
+        label: <Link to={"/login"}>Đăng nhập</Link>,
+        key: 'login',
+        icon: <LoginOutlined />,
+    }] : []),
+
+    ...(user.id ? [{
+        label: `welcome ${user.fullName}`,
+        key: 'welcomeUser',
+        icon: <AliwangwangOutlined />,
         children: [
             {
-                label: <Link to={"/login"}>Đăng nhập</Link>,
-                key: 'Login',
-            },
-            {
-                label: 'Đăng xuất',
+                label: <a onClick={() => logout()}>Đăng xuất</a>,
                 key: 'Logout',
             }
         ]
-    }
+    }] : []),
+
     ]
 
     return (

@@ -27,8 +27,6 @@ const usersPage = () => {
             setTotal(res.data.meta.total)
         }
     }
-
-    console.log(">>> check current", current)
     return (
         <div style={{ padding: "20px" }}>
             <UserForm

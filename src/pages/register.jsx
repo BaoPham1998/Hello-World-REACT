@@ -26,7 +26,6 @@ const RegisterPage = () => {
 
         }
 
-        console.log("check values", values)
     }
     return (
         <Form

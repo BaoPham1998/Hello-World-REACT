@@ -17,7 +17,6 @@ const MyComponent = () => {
     return (
         <>
             <div> {JSON.stringify(hoidanit)} BAO PHAM & ERIC</div>
-            <div>{console.log("BAOPHAM")}</div>
             <div className='child'
                 style={
                     { borderRadius: "10px" }

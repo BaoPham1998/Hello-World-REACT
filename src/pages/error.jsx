@@ -5,19 +5,19 @@ export default function ErrorPage() {
     // console.error(error);
 
     return (
-        <div id="error-page">
+
         <Result
-            status="403"
-            title="Oops!"
+            status="404"
+            title="Oops! 404 Error"
             subTitle={error.statusText || error.message}
             extra={
-            <Button type="primary" >
-            <Link to="/">
-                    <span>Back to Home Page</span>
-            </Link>
-            </Button>
+                <Button type="primary" >
+                    <Link to="/">
+                        <span>Back to Home Page</span>
+                    </Link>
+                </Button>
             }
         />
-        </div>
+
     );
 }
