@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 const usersPage = () => {
     const [dataUsers, setDataUsers] = useState([]);
     const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(5);
+    const [pageSize, setPageSize] = useState(6);
     const [total, setTotal] = useState(0);
 
 

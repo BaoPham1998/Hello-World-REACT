@@ -104,7 +104,7 @@ const usertable = (props) => {
         },
     ];
 
-    const onChange = (pagination, filters, sorter, extra) => {
+    const onChange = (pagination) => {
         if (pagination && pagination.current) {
             if (+current !== +pagination.current) {
                 setCurrent(+pagination.current);
