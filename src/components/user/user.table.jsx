@@ -18,6 +18,7 @@ const usertable = (props) => {
     const [userInfo, setUserInfo] = useState(null);
 
 
+
     const handleDeleteUser = async (id) => {
 
         const res = await deleteUser(id);
@@ -99,7 +100,7 @@ const usertable = (props) => {
                         <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
                     </Popconfirm>
 
-                </div >
+                </div>
             ),
         },
     ];

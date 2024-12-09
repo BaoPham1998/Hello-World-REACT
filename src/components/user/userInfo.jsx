@@ -1,10 +1,10 @@
 
 
-import { Drawer,Button, notification } from 'antd';
+import { Drawer, Button, notification } from 'antd';
 import { useState } from 'react';
-import {handleUploadFile, updateUserAvatarAPI} from "../../services/api.services"
+import { handleUploadFile, updateUserAvatarAPI } from "../../services/api.services"
 const UserInfo = (props) => {
-    const { userInfo, setUserInfo, openInfo, setOpenInfo ,loadUser } = props
+    const { userInfo, setUserInfo, openInfo, setOpenInfo, loadUser } = props
     const [selectedFile, setSelectedFile] = useState(null)
     const [preview, setPreview] = useState(null)
 
@@ -27,13 +27,13 @@ const UserInfo = (props) => {
             setPreview(URL.createObjectURL(file))
         }
     }
-    
+
     const handleSaveAvatar = async () => {
-        const resUpload =  await handleUploadFile(selectedFile,"avatar")
-        if(resUpload.data){
+        const resUpload = await handleUploadFile(selectedFile, "avatar")
+        if (resUpload.data) {
             const newAvatar = resUpload.data.fileUploaded;
-            const resUpdateAvatar = await updateUserAvatarAPI(newAvatar,userInfo._id,userInfo.fullName,userInfo.phone)
-            if(resUpdateAvatar.data){
+            const resUpdateAvatar = await updateUserAvatarAPI(newAvatar, userInfo._id, userInfo.fullName, userInfo.phone)
+            if (resUpdateAvatar.data) {
                 setOpenInfo(false);
                 setSelectedFile(null);
                 setPreview(null);
@@ -42,20 +42,20 @@ const UserInfo = (props) => {
                     message: "Update user avatar",
                     description: "Update avatar thành công",
                 })
-            }else{
+            } else {
                 notification.error({
                     message: "Error",
                     description: JSON.stringify(resUpdateAvatar.message)
                 })
             }
             // notification.success()
-        }else{
+        } else {
             notification.error({
                 message: "Error",
                 description: "Update avatar thất bại"
             })
         }
-        
+
     }
 
     return (
@@ -102,25 +102,25 @@ const UserInfo = (props) => {
                             />
                         </div>
                         {preview &&
-                        <>
-                            <div style={{
-                                marginTop: "20px",
-                                height: "100px", width: "150px",
-                            }}>
-                                <img src={preview}
-                                    style={{
-                                        height: "100%",
-                                        width: "100%",
-                                        objectFit: 'contain'
-                                    }}></img>
-                            </div>
-                            <Button style={{
-                                marginTop: "20px",
-                            }}
-                            type='primary'
-                            onClick={handleSaveAvatar}>SAVE</Button>
-                            
-                        </>
+                            <>
+                                <div style={{
+                                    marginTop: "20px",
+                                    height: "100px", width: "150px",
+                                }}>
+                                    <img src={preview}
+                                        style={{
+                                            height: "100%",
+                                            width: "100%",
+                                            objectFit: 'contain'
+                                        }}></img>
+                                </div>
+                                <Button style={{
+                                    marginTop: "20px",
+                                }}
+                                    type='primary'
+                                    onClick={handleSaveAvatar}>SAVE</Button>
+
+                            </>
                         }
 
 

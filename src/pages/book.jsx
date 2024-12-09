@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react'
 import { getBook } from '../services/api.services';
 import BookTable from '../components/book/book.table';
 
+
 const BookPage = () => {
     const [booksData, setBooksData] = useState([]);
     const [currentBook, setCurrentBook] = useState(1)
-    const [pageBookSize, setPageBookSize] = useState(3)
+    const [pageBookSize, setPageBookSize] = useState(10)
     const [totalBook, setTotalBook] = useState(0)
-
-
 
 
     const loadBookData = async () => {
@@ -27,16 +26,17 @@ const BookPage = () => {
 
 
     return (
-        <BookTable
-            booksData={booksData}
-            totalBook={totalBook}
-            pageBookSize={pageBookSize}
-            currentBook={currentBook}
-            setPageBookSize={setPageBookSize}
-            setCurrentBook={setCurrentBook}
-            loadBookData={loadBookData}
-            setTotalBook={setTotalBook}
-        />
+        <div style={{ padding: "20px" }}>
+            <BookTable
+                booksData={booksData}
+                totalBook={totalBook}
+                pageBookSize={pageBookSize}
+                currentBook={currentBook}
+                setPageBookSize={setPageBookSize}
+                setCurrentBook={setCurrentBook}
+                loadBookData={loadBookData}
+            />
+        </div>
     )
 }
 
