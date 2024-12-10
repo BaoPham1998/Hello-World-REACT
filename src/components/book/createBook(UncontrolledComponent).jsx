@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Button, Form, Input, Select, Space, Modal, InputNumber, notification } from 'antd';
+import { useState } from 'react'
+import { Button, Form, Input, Select, Modal, InputNumber, notification } from 'antd';
 import { createBook, handleUploadFile } from '../../services/api.services';
 
 
@@ -114,7 +114,6 @@ const CreateBookUncontrolledComponent = (props) => {
             >
                 <Form
                     form={form}
-                    name="control-hooks"
                     onFinish={handleSubmitBtn}
                     layout="vertical"
                 >

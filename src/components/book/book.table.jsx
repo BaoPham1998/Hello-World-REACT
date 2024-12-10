@@ -5,6 +5,7 @@ import { useState } from 'react';
 import CreateBook from "./create.book"
 import CreateBookUncontrolledComponent from './createBook(UncontrolledComponent)';
 import BookUpdate from './book.update';
+import BookUpdateUncontrolled from './book.update.Uncontrolled';
 
 const BookTable = (props) => {
 
@@ -152,10 +153,17 @@ const BookTable = (props) => {
                 setBookInfo={setBookInfo}
                 VND={VND}
             />
-            <BookUpdate
+            {/* <BookUpdate
                 loadBookData={loadBookData}
                 setIsUpdateModalOpen={setIsUpdateModalOpen}
                 isUpdateModalOpen={isUpdateModalOpen}
+                bookUpdateData={bookUpdateData}
+                setBookUpdateData={setBookUpdateData}
+            /> */}
+            <BookUpdateUncontrolled
+                isUpdateModalOpen={isUpdateModalOpen}
+                setIsUpdateModalOpen={setIsUpdateModalOpen}
+                loadBookData={loadBookData}
                 bookUpdateData={bookUpdateData}
                 setBookUpdateData={setBookUpdateData}
             />
