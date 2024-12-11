@@ -1,11 +1,12 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Table } from 'antd';
+import { Popconfirm, Table, message, notification } from 'antd';
 import BookInfo from "./book.info"
 import { useState } from 'react';
 import CreateBook from "./create.book"
 import CreateBookUncontrolledComponent from './createBook(UncontrolledComponent)';
 import BookUpdate from './book.update';
 import BookUpdateUncontrolled from './book.update.Uncontrolled';
+import { deleteBookAPI } from '../../services/api.services';
 
 const BookTable = (props) => {
 
@@ -19,7 +20,25 @@ const BookTable = (props) => {
 
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
-
+    const confirm = async (e) => {
+        const resDelete = await deleteBookAPI(e._id)
+        if (resDelete.data) {
+            notification.success({
+                message: "Xoá sách thành công !!",
+                description: "Đã xoá sách",
+            })
+            await loadBookData();
+        } else {
+            notification.error({
+                message: "Xoá sách thất bại !!",
+                description: JSON.stringify(resDelete.message),
+            })
+        }
+    };
+    const cancel = (e) => {
+        console.log(e);
+        message.error('Click on No');
+    };
 
 
     const onClose = () => {
@@ -94,7 +113,16 @@ const BookTable = (props) => {
                             setIsUpdateModalOpen(true)
                         }}
                     />
-                    <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                    <Popconfirm
+                        title="Xoá sách !!"
+                        description="bạn có muốn xoá sách này không?"
+                        onConfirm={() => confirm(record)}
+                        onCancel={cancel}
+                        okText="Có"
+                        cancelText="Không"
+                    >
+                        <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                    </Popconfirm>
                 </div>
             ),
 
