@@ -15,8 +15,9 @@ const BookTable = (props) => {
     const [isCreateOpen, setIsCreateOpen] = useState(false)
     const [bookUpdateData, setBookUpdateData] = useState(null)
 
+
     const { booksData, totalBook, pageBookSize, currentBook, setPageBookSize,
-        setCurrentBook, loadBookData, setTotalBook } = props;
+        setCurrentBook, loadBookData, setTotalBook, loadDingTables, setLoadDingTables } = props;
 
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
@@ -146,6 +147,7 @@ const BookTable = (props) => {
         }
     }
 
+
     return (
         <>
             {/* <CreateBook
@@ -172,6 +174,7 @@ const BookTable = (props) => {
                     }}
 
                 onChange={onChange}
+                loading={loadDingTables}
             />
             <BookInfo
                 openBookDrawer={openBookDrawer}

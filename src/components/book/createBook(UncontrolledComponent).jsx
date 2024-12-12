@@ -9,6 +9,7 @@ const CreateBookUncontrolledComponent = (props) => {
     const [form] = Form.useForm();
     const [preview, setPreview] = useState(null)
     const [selectedBookPic, setSelectedBookPic] = useState(null)
+    const [loadingCreateBook, setLoadingCreateBook] = useState(false)
     const showModal = () => {
         setIsCreateOpen(true)
     }
@@ -19,6 +20,7 @@ const CreateBookUncontrolledComponent = (props) => {
         setIsCreateOpen(false);
     };
     const handleSubmitBtn = async (value) => {
+        setLoadingCreateBook(true)
         if (!selectedBookPic) {
             notification.error({
                 message: "Vui lòng chọn ảnh cho book",
@@ -43,7 +45,9 @@ const CreateBookUncontrolledComponent = (props) => {
                     description: JSON.stringify(resCreateBook.message)
                 })
             }
+
         }
+        setLoadingCreateBook(false)
     }
     const handleUploadBookPic = (event) => {
 
@@ -109,6 +113,9 @@ const CreateBookUncontrolledComponent = (props) => {
                 open={isCreateOpen}
                 onCancel={resetAndCloseModalBook}
                 onOk={() => form.submit()}
+                okButtonProps={{
+                    loading: loadingCreateBook
+                }}
                 okText="CREATE"
                 maskClosable={false}
             >
